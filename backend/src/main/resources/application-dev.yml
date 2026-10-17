@@ -1,0 +1,5 @@
+# 开发环境：本机直跑，Ollama 直装宿主机（127.0.0.1:11434），可区分"未安装/未启动"
+logging:
+  level:
+    root: DEBUG
+    com.quill.agent: DEBUG

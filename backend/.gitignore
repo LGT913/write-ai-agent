@@ -1,0 +1,15 @@
+target/
+!.mvn/wrapper/maven-wrapper.jar
+*.log
+logs/
+
+# 本地环境配置（禁止提交任何真实密钥）
+src/main/resources/application-local.yml
+.env
+
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+.DS_Store

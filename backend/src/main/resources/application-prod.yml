@@ -1,0 +1,7 @@
+# 生产环境：强制 INFO 日志、屏蔽敏感字段输出
+logging:
+  level:
+    root: INFO
+    com.quill.agent: INFO
+  file:
+    name: logs/ai-agent-backend.log

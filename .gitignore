@@ -1,0 +1,20 @@
+# 构建产物
+backend/target/
+dist/
+node_modules/
+
+# 数据库与本地安全文件（生产规范 §1.7：禁止入库）
+*.db
+*.db-wal
+*.db-shm
+.local-token
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# 日志与临时文件
+*.log
+test-output.txt
+full-test-output.txt

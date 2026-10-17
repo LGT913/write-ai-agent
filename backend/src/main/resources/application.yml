@@ -1,0 +1,48 @@
+server:
+  port: ${SERVER_PORT:8080}
+  # 安全红线：仅绑定本机回环，禁止 0.0.0.0（v1.0 无鉴权，暴露公网可被任意读写本机文件）
+  address: 127.0.0.1
+
+spring:
+  application:
+    name: ai-agent-backend
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:dev}
+  ai:
+    ollama:
+      # 与下方 ollama.base-url 共用同一配置项，保证健康探测与 ModelRouter 一致
+      base-url: ${ollama.base-url}
+      chat:
+        options:
+          model: ${ollama.chat-model}
+          temperature: 0.7
+      embedding:
+        options:
+          model: ${ollama.embedding-model}
+  sql:
+    init:
+      mode: always
+    # 自定义 SqliteDataSourceConfig 已接管连接；不再写 spring.datasource.*
+
+# 应用数据目录（token 文件 / writer.db / agent.yml 均落此目录）
+writer:
+  data-dir: ${WRITER_DATA_DIR:${user.home}/.writer}
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+  global-config:
+    db-config:
+      id-type: auto
+
+# Ollama 统一配置项
+#   宿主机模式：http://127.0.0.1:11434
+#   Docker 容器模式：http://ollama:11434（服务名，勿用 127.0.0.1）
+ollama:
+  base-url: ${OLLAMA_BASE_URL:http://127.0.0.1:11434}
+  chat-model: ${OLLAMA_CHAT_MODEL:qwen2.5:3b}
+  embedding-model: ${EMBEDDING_MODEL:bge-m3}
+
+logging:
+  level:
+    root: INFO
